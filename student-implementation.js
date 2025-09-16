@@ -64,6 +64,7 @@ function handleKeyPress(key) {
     // HINT: Use regex /^[A-Z]$/ to test if key is a letter
     // HINT: Check if currentGuess.length < WORD_LENGTH before adding
     // HINT: Use getTile() and updateTileDisplay() to show the letter
+
     
     // TODO: Handle ENTER key
     // HINT: Check if guess is complete using isGuessComplete()
@@ -199,6 +200,7 @@ function updateKeyboardColors(guess, results) {
 function processRowReveal(rowIndex, results) {
     // TODO: Check if all results are 'correct'
     // HINT: Use results.every() method
+
     
     // TODO: If all correct, trigger celebration
     // HINT: Use celebrateRow() function
@@ -222,6 +224,7 @@ function showEndGameModal(won, targetWord) {
     
     // TODO: Update statistics
     // HINT: Use updateStats() function
+    updateStats(won, )
     
     // TODO: Show the modal
     // HINT: Use showModal() function
@@ -241,18 +244,27 @@ function showEndGameModal(won, targetWord) {
  */
 function validateInput(key, currentGuess) {
     // TODO: Return false if game is over
+    if (gameOver) return false;
     
     // TODO: Handle letter keys
     // HINT: Check if currentGuess.length < WORD_LENGTH
-    
+    if (/^[A-Z]$/.test(key) && currentGuess.length < WORD_LENGTH) {
+        return true;
+    }
+
     // TODO: Handle ENTER key
     // HINT: Check if currentGuess.length === WORD_LENGTH
+    if (key === 'ENTER' && currentGuess.length === WORD_LENGTH) {
+        return true;
+    }
     
     // TODO: Handle BACKSPACE key
     // HINT: Check if currentGuess.length > 0
+    if (currentGuess.length > 0 && key === 'BACKSPACE') {
+        return true;
+    }
     
     console.log('Validating input:', key); // Remove this line
-    return true; // Replace with actual validation logic
 }
 
 // ========================================
