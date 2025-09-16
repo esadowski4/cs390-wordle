@@ -33,12 +33,15 @@ function initializeGame() {
     
     // TODO: Get a random word from the word list
     // HINT: Use WordleWords.getRandomWord()
+    WordleWords.getRandomWord() = currentWord;
     
     // TODO: Reset the game board
     // HINT: Use resetBoard()
+    resetBoard();
     
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
+    hideModal();
     
     console.log('Game initialized!'); // Remove this line when implementing
 }
@@ -55,6 +58,7 @@ function initializeGame() {
  */
 function handleKeyPress(key) {
     // TODO: Check if game is over - if so, return early
+    if (gameOver) return;
     
     // TODO: Handle letter keys (A-Z)
     // HINT: Use regex /^[A-Z]$/ to test if key is a letter
