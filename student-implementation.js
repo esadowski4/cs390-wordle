@@ -32,14 +32,19 @@ function initializeGame() {
     gameWon = false;
     
     // TODO: Get a random word from the word list
+    currentWord = WordleWords.getRandomWord();
+
+
     // HINT: Use WordleWords.getRandomWord()
     WordleWords.getRandomWord() = currentWord;
     
     // TODO: Reset the game board
+    currentBoard = [];
     // HINT: Use resetBoard()
     resetBoard();
     
     // TODO: Hide any messages
+    clearMessage();
     // HINT: Use hideModal() and ensure message element is hidden
     hideModal();
     
@@ -65,15 +70,33 @@ function handleKeyPress(key) {
     // HINT: Check if currentGuess.length < WORD_LENGTH before adding
     // HINT: Use getTile() and updateTileDisplay() to show the letter
 
+    if (/^[A-Z]$/.test(key) && currentGuess.length < WORD_LENGTH) {
+        currentGuess += key;
+        const tile = getTile(currentRow, currentGuess.length - 1);
+        updateTileDisplay(tile, key);
+    }
     
     // TODO: Handle ENTER key
     // HINT: Check if guess is complete using isGuessComplete()
     // HINT: Call submitGuess() if complete, show error message if not
+
+    if (key === 'ENTER') {
+        if (isGuessComplete()) {
+            submitGuess();
+        } else {
+            showMessage('Not enough letters');
+            shakeRow(currentRow);
+        }
     
     // TODO: Handle BACKSPACE key  
     // HINT: Check if there are letters to remove
     // HINT: Clear the tile display and remove from currentGuess
     
+    } else if (key === 'BACKSPACE' && currentGuess.length > 0) {
+        const tile = getTile(currentRow, currentGuess.length - 1);
+        updateTileDisplay(tile, '');
+        currentGuess = currentGuess.slice(0, -1);
+    }   
     console.log('Key pressed:', key); // Remove this line when implementing
 }
 
