@@ -41,8 +41,6 @@ function initializeGame() {
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
     hideModal();
-    
-    console.log('Game initialized!'); // Remove this line when implementing
 }
 
 /**
@@ -163,7 +161,6 @@ function checkLetter(guessLetter, position, targetWord) {
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
     
-    console.log('Checking letter:', guessLetter, 'at position:', position); // Remove this line
     return 'absent';
 }
 
@@ -246,8 +243,6 @@ function processRowReveal(rowIndex, results) {
     if (allCorrect) {
         celebrateRow(rowIndex);
     }
-
-    console.log('Processing row reveal for row:', rowIndex); // Remove this line
 }
 
 /**
@@ -277,8 +272,6 @@ function showEndGameModal(won, targetWord) {
     // TODO: Show the modal
     // HINT: Use showModal() function
     showModal(won, targetWord);
-    
-    console.log('Showing end game modal. Won:', won, 'Word:', targetWord); // Remove this line
 }
 
 /**
@@ -312,8 +305,6 @@ function validateInput(key, currentGuess) {
     if (key === 'BACKSPACE' && currentGuess.length > 0) {
         return true;
     }
-    
-    console.log('Validating input:', key); // Remove this line
 }
 
 // ========================================
