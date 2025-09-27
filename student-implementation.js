@@ -226,8 +226,6 @@ function updateKeyboardColors(guess, results) {
         // HINT: Don't change yellow keys to gray
         // Note: The updateKeyboardKey function already handles this priority system
     }
-    
-    console.log('Updating keyboard colors for:', guess); // Remove this line
 }
 
 /**
