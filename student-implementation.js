@@ -153,14 +153,44 @@ function checkLetter(guessLetter, position, targetWord) {
 
     // TODO: Check if letter exists elsewhere in target
     // HINT: Use targetWord.includes() or indexOf()
-    if (targetWord.includes(guessLetter)) {
-        return 'present';
-    }
     
     // TODO: Handle duplicate letters correctly
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
+
+    // if submitGuess() works better,
+    // if (targetWord.includes(guessLetter)) {
+    //     return 'present';
+    // }
     
+    if (targetWord.includes(guessLetter)) {
+        const guessWord = getCurrentGuess();
+
+        let targetCount = 0;
+        for (let i = 0; i < targetWord.length; i++) {
+            if (targetWord[i] === guessLetter) {
+              targetCount++;
+            }
+        }
+
+        for (let i = 0; i < targetWord.length; i++) {
+            if (targetWord[i] === guessLetter) {
+                targetCount--;
+            }
+        }
+
+        let used = 0;
+        for (let i = 0; i < position; i++) {
+            if (guessWord[i] === guessLetter && targetWord[i] !== guessLetter) {
+                used++;
+            }
+        }
+
+        if (used < targetCount) {
+            return 'present';
+        }
+    }
+
     return 'absent';
 }
 
