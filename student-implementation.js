@@ -220,8 +220,6 @@ function updateGameState(isCorrect) {
         showEndGameModal(false, currentWord);
         return;
     }
-    
-    console.log('Game state updated. Correct:', isCorrect); // Remove this line
 }
 
 // ========================================
