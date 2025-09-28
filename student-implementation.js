@@ -103,31 +103,61 @@ function handleKeyPress(key) {
 function submitGuess() {
     // TODO: Validate guess is complete
     // HINT: Use isGuessComplete()
-    
-    // TODO: Validate guess is a real word
-    // HINT: Use WordleWords.isValidWord()
-    // HINT: Show error message and shake row if invalid
-    
-    // TODO: Check each letter and get results
-    // HINT: Use checkLetter() for each position
-    // HINT: Store results in an array
-    
-    // TODO: Update tile colors immediately
-    // HINT: Loop through results and use setTileState()
-    
-    // TODO: Update keyboard colors
-    // HINT: Call updateKeyboardColors()
-    
-    // TODO: Check if guess was correct
-    // HINT: Compare currentGuess with currentWord
+    if (isGuessComplete(currentGuess)) {
+        // TODO: Validate guess is a real word
+        // HINT: Use WordleWords.isValidWord()
+        // HINT: Show error message and shake row if invalid
+        if (WordleWords.isValidWord(currentGuess)) {
+            // TODO: Check each letter and get results
+            // HINT: Use checkLetter() for each position
+            // HINT: Store results in an array
+            const results = [];
+            for (let i = 0; i < currentGuess.length; i++) {
+                results.push(checkLetter(currentGuess[i], i, currentWord));
+            }
+            
+            // TODO: Update tile colors immediately
+            // HINT: Loop through results and use setTileState()
+            for (let i = 0; i < results.length; i++) {
+                setTileState(getTile(currentRow, i), results[i]);
+            }
+
+            // TODO: Update keyboard colors
+            // HINT: Call updateKeyboardColors()
+            updateKeyboardColors(currentGuess, results);
+
+            // TODO: Check if guess was correct
+            // HINT: Compare currentGuess with currentWord
+            if (currentGuess === currentWord) {
+                gameWon = true;
+                gameOver = true;
+                showEndGameModal(true, currentWord);
+                return;
+            } else {
+                // TODO: Move to next row if game continues
+                // HINT: Increment currentRow and reset currentGuess
+                currentRow++;
+                currentGuess = '';
+
+                // TODO: Check if game is over (no more rows)
+                // HINT: Check if currentRow >= MAX_GUESSES - 1
+                if (currentRow >= 6) {
+                    gameOver = true;
+                    showEndGameModal(false, currentWord);
+                    return;
+                }
+            }
+        } else {
+            // TODO: Show error message and shake row if invalid
+            // HINT: Use showMessage() and shakeRow()
+            showMessage('Invalid word', 'error');
+            shakeRow(currentRow);
+        }
+    }
     
     // TODO: Update game state
     // HINT: Call updateGameState()
-    
-    // TODO: Move to next row if game continues
-    // HINT: Increment currentRow and reset currentGuess
-    
-    console.log('Guess submitted:', currentGuess); // Remove this line when implementing
+    updateGameState();
 }
 
 /**
